@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>
+
+<head id="headId">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="myStyle.css">
+	<title>Aplicatie Fortech</title>
+</head>
+
+<body id= "bodyId">
+
+  <header>
+    <h1>Project Management Tool</h1>
+  </header>
+
+  <section>
+    <form id="loginForm">
+      <div class="container">
+        <label for="uname">Username</label>
+        <input id="uname" type="text" placeholder="Enter Username" name="uname" required>  
+        <button id="submit" type="button" onclick="welcome('plog');hide('loginForm');show('createProjectButton')">Log in</button>
+      </div>
+    </form>
+
+    <p id="plog">Please log in.</p>
+    <button id="logout" type="button" onclick="show('loginForm');hide('importantThingsHappenHere')">Change user</button>
+
+  </section>
+
+
+  <br> <br>
+  <script> 
+    function hide(e) {
+      document.getElementById(e).style.visibility = "hidden";
+    } 
+    function welcome(e){
+      document.getElementById(e).innerHTML = "Welcome!";
+    }
+    function show(e) {
+      document.getElementById(e).style.visibility = "visible";
+    }
+  </script>
+
+  <section id="importantThingsHappenHere">
+
+    <button id="createProjectButton" type="button" onclick="hide('createProjectButton');show('importantThingsHappenHere')">Create project</button>
+
+    <button id="createSprintButton" type="button" onclick="show('sprintForm')">Create sprint</button>
+
+    <button id="createIssueButton" type="button" onclick="show('issueForm')" >Create issue</button>
+
+    <button id="createSubtaskButton" type="button" onclick="show('subtaskForm')">Create subtask</button>
+
+    <button id="createCommentButton" type="button" onclick="show('commentForm')">Create comment</button>
+
+    <button id="createUpdateButton" type="button" onclick="show('updateForm')">Update</button>
+
+    <button id="showTasksButton" type="button" onclick="show('taskFilterForm')">Show tasks</button>
+
+
+    <form id="sprintForm">
+        <label for="spname">Sprint name</label>
+        <input id="spname" type="text" placeholder="Enter sprint name" name="spname" required>  
+        <button id="addSprint" type="button" onclick="hide('sprintForm')">Submit</button>
+      </div>
+    </form>
+
+    <form id="issueForm">
+      <label for="iname">Issue Name</label>
+        <input id="iname" type="text" placeholder="Enter issue name" name="iname" required>  
+      <label for="issueType">Enter issue type</label>
+        <select id="issueType" required>
+          <option value="bug">Bug</option>
+          <option value="feature">Feature</option>
+          <option value="task">Task</option>
+        </select>
+
+      <label for="issueSprint">Enter issue sprint</label>
+        <select id="issueSprint" type="text" name="isprint" required>
+        </select>
+   
+      <button id="addIssue" type="button" onclick="hide('issueForm')"> Submit </button>
+    </form>
+
+    <form id='subtaskForm'>
+      <label for="sname">Issue name</label>
+        <input id="sname" type="text" placeholder="Enter subtask name" name="iname" required>  
+      <label for="subtaskIssue">Enter subtask issue</label>
+        <select id="subtaskIssue" required>
+        </select>
+
+      <button id="addSubtask" type="button" onclick="hide('subtaskForm')"> Submit </button>
+  
+    </form>
+
+    <form id="commentForm">
+        <label for="comname">Sprint name</label>
+        <input id="comname" type="text" placeholder="Enter comment name" name="spname" required>  
+        <button id="addComment" type="button" onclick="hide('commentForm')">Submit</button>
+      </div>
+    </form>    
+
+    <form id='updateForm'>
+      <label for="updateOptions">Enter subtask issue</label>
+        <select id="updateOptions" required>
+        </select>
+  
+      <button id="updateIssueButton" type="button" onclick="hide('updateForm');show('issueExplainer')"> Show detailed issue </button>
+  
+    </form>
+
+    <div id="issueExplainer">
+      <div id="issueToUpdate">
+        Details of issue to update
+      </div>
+      <label for="upname">New issue Name</label>
+        <input id="upname" type="text" placeholder="Enter new issue name" name="upname">
+      <label for="newIssueType">Enter new issue type</label>
+        <select id="newIssueType" >
+          <option value="bug">Bug</option>
+          <option value="feature">Feature</option>
+          <option value="task">Task</option>
+        </select>
+  
+      <label for="newIssueStatus">Enter new issue status</label>
+        <select id="newIssueStatus">
+          <option value="New">New</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Feedback">Feedback</option>
+          <option value="Rework">Rework</option>
+          <option value="Resolved">Resolved</option>
+          <option value="Ready for Testing">Ready for Testing</option>
+        </select>
+
+      <label for="newIssueSprint">Enter new issue sprint</label>
+        <select id="newIssueSprint"></select>
+
+      <label for="newIssueComments">Change issue comments</label>
+        <select id="newIssueComments" multiple> </select>
+        <select id="newIssueTasks" multiple>
+        </select>
+
+      <button id="submitUpdateIssueButton" type="button" onclick="hide('issueExplainer');updateIssue()"> Update this issue </button>
+    </div>
+
+
+    <form id="taskFilterForm">
+
+      <label for="taskFilterBySprint">Filter issue by sprint</label>
+        <select id="taskFilterBySprint">
+          <option value="null">All</option>
+        </select>
+
+      <label for="taskFilterByStatus">Filter issue by status</label>
+        <select id="taskFilterByStatus">
+          <option value="null">All</option>
+          <option value="New">New</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Feedback">Feedback</option>
+          <option value="Rework">Rework</option>
+          <option value="Resolved">Resolved</option>
+          <option value="Ready for Testing">Ready for Testing</option>
+        </select>
+
+      <button id="submitTaskFilter" type="button" onclick="hide('taskFilterForm');show('myToDoList')"> Show </button>
+    </form>
+
+    <div id="myToDoList" class="header">
+      <p>Project To Do List</p>
+    </div>
+
+  </section>
+
+  <script src="myScript.js"></script>
+
+  
+
+</body>
+</html>
